@@ -42,20 +42,20 @@
     </bean>
 
     <!-- 异常处理 -->
-    <bean id="exceptionResolver" class="com.whl.blog.common.handler.BlogExceptionHandler"/>
+    <bean id="exceptionResolver" class="com.whl.blog.web.common.handler.BlogExceptionHandler"/>
 
     <mvc:interceptors>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/statics/**"/>
             <mvc:exclude-mapping path="/view/statics/**"/>
-            <bean class="com.whl.blog.common.interceptor.TraceInterceptor"/>
+            <bean class="com.whl.blog.web.common.interceptor.TraceInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/statics/**"/>
             <mvc:exclude-mapping path="/view/statics/**"/>
-            <bean class="com.whl.blog.common.interceptor.CORSInterceptor"/>
+            <bean class="com.whl.blog.web.common.interceptor.CORSInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -63,7 +63,7 @@
             <mvc:exclude-mapping path="/login/getPin"/>
             <mvc:exclude-mapping path="/statics/**"/>
             <mvc:exclude-mapping path="/view/statics/**"/>
-            <bean class="com.jiupai.platform.merchant.common.interceptor.CookieAuthInterceptor"/>
+            <bean class="com.whl.blog.web.common.interceptor.CookieAuthInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>

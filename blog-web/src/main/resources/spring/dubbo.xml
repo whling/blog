@@ -6,29 +6,10 @@
          http://www.springframework.org/schema/beans/spring-beans-3.0.xsd
          http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd">
 
-    <dubbo:application name="platform-merchant-web" logger="slf4j"/>
+    <dubbo:application name="blog-web" logger="slf4j"/>
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" register="true" timeout="100000"/>
-    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
 
     <dubbo:reference id="merInfoService" interface="com.jiupai.platform.merchant.api.IMerInfoService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merPwdMgrService" interface="com.jiupai.platform.merchant.api.IMerPwdMgrService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merCertService" interface="com.jiupai.platform.merchant.api.IMerCertService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merAccountService" interface="com.jiupai.platform.merchant.api.IMerAccountService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merRechargeService" interface="com.jiupai.platform.merchant.api.IMerRechargeService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merWithdrawService" interface="com.jiupai.platform.merchant.api.IMerWithdrawService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merOrderService" interface="com.jiupai.platform.merchant.api.IMerOrderService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merFeesService" interface="com.jiupai.platform.merchant.api.IMerFeesService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merClearService" interface="com.jiupai.platform.merchant.api.IMerClearService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merQrCodeService" interface="com.jiupai.platform.merchant.api.IMerQrCodeService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="batTradeService" interface="com.jiupai.platform.merchant.api.IBatTradeService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="smsService" interface="com.jiupai.platform.merchant.api.ISmsService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merBillingService" interface="com.jiupai.platform.merchant.api.IMerBillingService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="merPerCardService" interface="com.jiupai.platform.merchant.api.IMerPreCardService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="orderTradeService" interface="com.jiupai.platform.merchant.api.IOrderTradeService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="payTradeService" interface="com.jiupai.platform.merchant.api.IPayTradeService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:reference id="capTradeService" interface="com.jiupai.platform.merchant.api.ICapTradeService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-   	
-   	<dubbo:reference id="batchTransferService" interface="com.jiupai.paytool.api.interfaces.IBatchTransferService" version="1.0.0" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-   	<dubbo:reference id="batchCollectionService" interface="com.jiupai.paytool.api.interfaces.IBatchCollectionService" version="1.0.0" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
     <dubbo:monitor protocol="registry" />
 </beans>

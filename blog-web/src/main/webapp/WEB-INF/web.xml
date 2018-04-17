@@ -9,11 +9,11 @@
     <display-name>blog-web</display-name>
 
     <listener>
-        <listener-class>com.whl.blog.common.listener.SystemContextLoaderListener</listener-class>
+        <listener-class>com.whl.blog.web.common.listener.SystemContextLoaderListener</listener-class>
     </listener>
 
     <listener>
-        <listener-class>com.whl.blog.common.listener.SpringWrapper</listener-class>
+        <listener-class>com.whl.blog.web.common.listener.SpringWrapper</listener-class>
     </listener>
 
     <servlet>

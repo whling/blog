@@ -33,12 +33,12 @@
 
     <bean id="sqlSessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean">
         <property name="mapperLocations" value="classpath*:mybatis/mapper/*.xml"/>
-        <property name="typeAliasesPackage" value="com.jiupai.platform.merchant.dto"/>
+        <property name="typeAliasesPackage" value="com.whl.blog.api.pojo"/>
         <property name="dataSource" ref="dataSource"/>
     </bean>
 
     <bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
-        <property name="basePackage" value="com.jiupai.platform.merchant.dao"/>
+        <property name="basePackage" value="com.whl.blog.server.dao"/>
     </bean>
 
     <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
