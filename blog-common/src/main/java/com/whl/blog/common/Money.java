@@ -9,10 +9,11 @@ import java.math.RoundingMode;
 
 /**
  * Created by whling on 2017/6/25.
- *
  */
 public class Money implements Comparable<Money>, Serializable {
+
     private static final long serialVersionUID = -3178121776163258055L;
+
     private static final RoundingMode DEFAULT_ROUNDING;
     private static final RoundingMode ROUNDING_MODE_DOWN;
     private static final MathContext DEF_MC;
@@ -24,7 +25,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public static Money of(String amount) {
-        return StringUtils.isEmpty(amount)?MONEY_ZERO:new Money(new BigDecimal(amount));
+        return StringUtils.isEmpty(amount) ? MONEY_ZERO : new Money(new BigDecimal(amount));
     }
 
     public static Money of(double amount) {
@@ -40,16 +41,16 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public static Money of(String amount, String defaultValue) {
-        return amount != null && amount.trim().length() != 0?new Money(new BigDecimal(amount)):new Money(new BigDecimal(defaultValue));
+        return amount != null && amount.trim().length() != 0 ? new Money(new BigDecimal(amount)) : new Money(new BigDecimal(defaultValue));
     }
 
     public static Money total(Money... monies) {
-        if(monies.length == 0) {
+        if (monies.length == 0) {
             throw new IllegalArgumentException("Money array must not be empty");
         } else {
             Money total = monies[0];
 
-            for(int i = 1; i < monies.length; ++i) {
+            for (int i = 1; i < monies.length; ++i) {
                 total = total.plus(new Money[]{monies[i]});
             }
 
@@ -62,7 +63,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     private Money with(BigDecimal newAmount) {
-        return newAmount.equals(this.amount)?this:new Money(newAmount);
+        return newAmount.equals(this.amount) ? this : new Money(newAmount);
     }
 
     public boolean isZero() {
@@ -90,7 +91,7 @@ public class Money implements Comparable<Money>, Serializable {
         Money[] arr$ = toAdds;
         int len$ = toAdds.length;
 
-        for(int i$ = 0; i$ < len$; ++i$) {
+        for (int i$ = 0; i$ < len$; ++i$) {
             Money money = arr$[i$];
             total = total.add(money.amount, DEF_MC);
         }
@@ -99,7 +100,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money plus(BigDecimal amountToAdd) {
-        if(amountToAdd.compareTo(BigDecimal.ZERO) == 0) {
+        if (amountToAdd.compareTo(BigDecimal.ZERO) == 0) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.add(amountToAdd, DEF_MC);
@@ -112,7 +113,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money plus(double amountToAdd) {
-        if(amountToAdd == 0.0D) {
+        if (amountToAdd == 0.0D) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.add(BigDecimal.valueOf(amountToAdd), DEF_MC);
@@ -125,7 +126,7 @@ public class Money implements Comparable<Money>, Serializable {
         Money[] arr$ = accountMoneys;
         int len$ = accountMoneys.length;
 
-        for(int i$ = 0; i$ < len$; ++i$) {
+        for (int i$ = 0; i$ < len$; ++i$) {
             Money money = arr$[i$];
             total = total.subtract(money.amount, DEF_MC);
         }
@@ -138,7 +139,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money minus(BigDecimal amountToSubtract) {
-        if(amountToSubtract.compareTo(BigDecimal.ZERO) == 0) {
+        if (amountToSubtract.compareTo(BigDecimal.ZERO) == 0) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.subtract(amountToSubtract, DEF_MC);
@@ -147,7 +148,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money minus(double amountToSubtract) {
-        if(amountToSubtract == 0.0D) {
+        if (amountToSubtract == 0.0D) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.subtract(BigDecimal.valueOf(amountToSubtract), DEF_MC);
@@ -156,7 +157,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money minusMajor(long amountToSubtract) {
-        if(amountToSubtract == 0L) {
+        if (amountToSubtract == 0L) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.subtract(BigDecimal.valueOf(amountToSubtract), DEF_MC);
@@ -165,7 +166,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money minusMinor(long amountToSubtract, int scale) {
-        if(amountToSubtract == 0L) {
+        if (amountToSubtract == 0L) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.subtract(BigDecimal.valueOf(amountToSubtract, scale), DEF_MC);
@@ -178,7 +179,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money multiply(BigDecimal valueToMultiplyBy) {
-        if(valueToMultiplyBy.compareTo(BigDecimal.ONE) == 0) {
+        if (valueToMultiplyBy.compareTo(BigDecimal.ONE) == 0) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.multiply(valueToMultiplyBy, DEF_MC);
@@ -187,7 +188,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money multiply(double valueToMultiplyBy) {
-        if(valueToMultiplyBy == 1.0D) {
+        if (valueToMultiplyBy == 1.0D) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.multiply(BigDecimal.valueOf(valueToMultiplyBy), DEF_MC);
@@ -196,7 +197,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money multiply(long valueToMultiplyBy) {
-        if(valueToMultiplyBy == 1L) {
+        if (valueToMultiplyBy == 1L) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.multiply(BigDecimal.valueOf(valueToMultiplyBy), DEF_MC);
@@ -209,7 +210,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money divide(BigDecimal value) {
-        if(value.compareTo(BigDecimal.ONE) == 0) {
+        if (value.compareTo(BigDecimal.ONE) == 0) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.divide(value, DEF_MC);
@@ -218,7 +219,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money divide(double value) {
-        if(value == 1.0D) {
+        if (value == 1.0D) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.divide(BigDecimal.valueOf(value), DEF_MC);
@@ -227,7 +228,7 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money divide(long value) {
-        if(value == 1L) {
+        if (value == 1L) {
             return this;
         } else {
             BigDecimal newAmount = this.amount.divide(BigDecimal.valueOf(value), DEF_MC);
@@ -236,11 +237,11 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public Money negate() {
-        return this.isZero()?this:this.with(this.amount.negate());
+        return this.isZero() ? this : this.with(this.amount.negate());
     }
 
     public Money abs() {
-        return this.isNegative()?this.negate():this;
+        return this.isNegative() ? this.negate() : this;
     }
 
     public boolean isGreaterThan(Money other) {
@@ -264,10 +265,10 @@ public class Money implements Comparable<Money>, Serializable {
     }
 
     public boolean equals(Object other) {
-        if(this == other) {
+        if (this == other) {
             return true;
-        } else if(other instanceof Money) {
-            Money otherMoney = (Money)other;
+        } else if (other instanceof Money) {
+            Money otherMoney = (Money) other;
             return this.amount.equals(otherMoney.amount);
         } else {
             return false;

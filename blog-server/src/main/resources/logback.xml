@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<configuration>
+    <property name="LOG_HOME" value="./logs" />
+
+    <appender name="STDOUT" class="ch.qos.logback.core.ConsoleAppender">
+        <Encoding>UTF-8</Encoding>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%mdc{mdc_req_id}] [%mdc{mdc_opr_id}] [%mdc{mdc_uri}] [%thread] [%level] %logger{80} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="FILE"  class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/blog.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <maxHistory>3000</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <pattern>
+                [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%mdc{mdc_req_id}] [%mdc{mdc_opr_id}] [%mdc{mdc_uri}] [%thread] [%level] %logger{80} - %msg%n
+            </pattern>
+        </layout>
+    </appender>
+
+    <appender name="ERRORLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <FileNamePattern>${LOG_HOME}/blog_error.log.%d{yyyy-MM-dd}</FileNamePattern>
+            <maxHistory>3000</maxHistory>
+        </rollingPolicy>
+        <layout class="ch.qos.logback.classic.PatternLayout">
+            <Pattern>
+                [%d{yyyy-MM-dd HH:mm:ss.SSS}] [%mdc{mdc_req_id}] [%mdc{mdc_opr_id}] [%mdc{mdc_uri}] [%thread] [%level] %logger{80} - %msg%n
+            </Pattern>
+        </layout>
+        <filter class="ch.qos.logback.classic.filter.LevelFilter">
+            <level>ERROR</level>
+            <onMatch>ACCEPT</onMatch>
+            <onMismatch>DENY</onMismatch>
+        </filter>
+    </appender>
+
+    <appender name="DUBBOLOG" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <Encoding>UTF-8</Encoding>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>${LOG_HOME}/dubbo.log.%d{yyyy-MM-dd}</fileNamePattern>
+            <maxHistory>3000</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss.SSS} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <immediateFlush>true</immediateFlush>
+        </encoder>
+    </appender>
+
+	<!--<appender name="BATCHPAYRECEIPTLOG"  class="ch.qos.logback.core.rolling.RollingFileAppender">-->
+        <!--<Encoding>UTF-8</Encoding>-->
+        <!--<rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">-->
+            <!--<FileNamePattern>${LOG_HOME}/merchantBatch.log.%d{yyyy-MM-dd}</FileNamePattern>-->
+            <!--<maxHistory>3000</maxHistory>-->
+        <!--</rollingPolicy>-->
+        <!--<layout class="ch.qos.logback.classic.PatternLayout">-->
+            <!--<pattern>-->
+                <!--[%d{yyyy-MM-dd HH:mm:ss.SSS}] [%mdc{mdc_req_id}] [%mdc{mdc_opr_id}] [%mdc{mdc_uri}] [%thread] [%level] %logger{80} - %msg%n-->
+            <!--</pattern>-->
+        <!--</layout>-->
+    <!--</appender>-->
+
+    <logger name="com.alibaba.dubbo" level="INFO" additivity="false">
+        <appender-ref ref="DUBBOLOG"/>
+    </logger>
+
+    <logger name="org.springframework" level="WARN"/>
+    <logger name="java.sql.Connection" level="DEBUG"/>
+    <logger name="java.sql.ResultSet" level="INFO"/>
+    <logger name="com.whl.blog." level="INFO" additivity="false"/>
+
+	<!--<logger name="com.jiupai.platform.merchant.common.BatchLogUtil" level="INFO" >-->
+		<!--<appender-ref ref="BATCHPAYRECEIPTLOG"/>-->
+	<!--</logger>-->
+
+    <!-- 日志输出级别 -->
+    <root level="INFO">
+        <appender-ref ref="FILE" />
+        <appender-ref ref="ERRORLOG" />
+        <appender-ref ref="STDOUT" />
+    </root>
+</configuration>

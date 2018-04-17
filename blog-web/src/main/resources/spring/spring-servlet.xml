@@ -17,7 +17,7 @@
     <mvc:default-servlet-handler/>
     <aop:aspectj-autoproxy proxy-target-class="true" expose-proxy="true"/>
 
-    <context:component-scan base-package="com.whl.blog.controller" use-default-filters="false">
+    <context:component-scan base-package="com.whl.blog.web.controller" use-default-filters="false">
         <context:include-filter type="annotation" expression="org.springframework.stereotype.Controller"/>
     </context:component-scan>
 
@@ -49,13 +49,13 @@
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/statics/**"/>
             <mvc:exclude-mapping path="/view/statics/**"/>
-            <bean class="com.jiupai.platform.merchant.common.interceptor.TraceInterceptor"/>
+            <bean class="com.whl.blog.common.interceptor.TraceInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
             <mvc:exclude-mapping path="/statics/**"/>
             <mvc:exclude-mapping path="/view/statics/**"/>
-            <bean class="com.jiupai.platform.merchant.common.interceptor.CORSInterceptor"/>
+            <bean class="com.whl.blog.common.interceptor.CORSInterceptor"/>
         </mvc:interceptor>
         <mvc:interceptor>
             <mvc:mapping path="/**"/>
@@ -84,11 +84,11 @@
         </property>
     </bean>
 
-    <bean id="oprLogAop" class="com.whl.blog.aop.OpLogAop"/>
+    <bean id="oprLogAop" class="com.whl.blog.web.aop.OpLogAop"/>
 
     <aop:config>
         <aop:aspect ref="oprLogAop">
-            <aop:pointcut id="pointOprLog" expression="execution(* com.whl.blog.controller.*.*(..))"/>
+            <aop:pointcut id="pointOprLog" expression="execution(* com.whl.blog.web.controller.*.*(..))"/>
             <aop:after-returning method="afterReturning" returning="ret" pointcut-ref="pointOprLog"/>
         </aop:aspect>
     </aop:config>

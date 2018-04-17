@@ -1,9 +1,9 @@
 package com.whl.blog.common;
 
-import com.jiupai.platform.merchant.common.result.FailureResult;
-import com.jiupai.platform.merchant.common.result.ReMessage;
-import com.jiupai.platform.merchant.common.result.Result;
-import com.jiupai.platform.merchant.common.result.SuccessResult;
+import com.whl.blog.common.result.FailureResult;
+import com.whl.blog.common.result.ReMessage;
+import com.whl.blog.common.result.Result;
+import com.whl.blog.common.result.SuccessResult;
 import org.apache.commons.lang3.StringUtils;
 import org.apache.commons.lang3.math.NumberUtils;
 

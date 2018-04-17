@@ -1,6 +1,6 @@
 package com.whl.blog.common;
 
-import com.jiupai.platform.merchant.cache.MerCache;
+import com.whl.blog.web.cache.BlogCache;
 import org.apache.commons.lang3.ArrayUtils;
 import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
@@ -50,17 +50,17 @@ public class CookieAuthUtil {
 
     public static boolean checkAuth(String requestIp, String[] cookieValues) {
         String sessionToken = cookieValues[0], oprLogId = cookieValues[1];
-        if (MerCache.isTimeout(sessionToken)) {
+        if (BlogCache.isTimeout(sessionToken)) {
             logger.info("checkAuth fail [session time out!]");
             return false;
         }
         String loginIp;
-        if (!StringUtils.equals((loginIp = MerCache.getValue(sessionToken, MerCache.MER_REQUEST_IP)), requestIp)) {
+        if (!StringUtils.equals((loginIp = BlogCache.getValue(sessionToken, BlogCache.MER_REQUEST_IP)), requestIp)) {
             logger.info("checkAuth fail loginIp [{}] reqIp [{}]", loginIp, requestIp);
             return false;
         }
         String loginOprId;
-        if (!StringUtils.equals((loginOprId = MerCache.getValue(sessionToken, MerCache.MER_OPR_LOG_ID)), oprLogId)) {
+        if (!StringUtils.equals((loginOprId = BlogCache.getValue(sessionToken, BlogCache.MER_OPR_LOG_ID)), oprLogId)) {
             logger.info("checkAuth fail loginOprId [{}] reqOprId [{}]", loginOprId, oprLogId);
             return false;
         }
@@ -68,9 +68,9 @@ public class CookieAuthUtil {
     }
 
     private static void setCookieParams(Cookie cookie) {
-        cookie.setDomain(MerchantContext.SIT_DOMAIN);
-        cookie.setMaxAge(MerchantContext.SIT_MAXAGE);
-        cookie.setPath(MerchantContext.SIT_PATH);
+        cookie.setDomain(BlogContext.SIT_DOMAIN);
+        cookie.setMaxAge(BlogContext.SIT_MAXAGE);
+        cookie.setPath(BlogContext.SIT_PATH);
     }
 
 }

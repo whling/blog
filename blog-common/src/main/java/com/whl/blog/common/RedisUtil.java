@@ -26,18 +26,18 @@ public class RedisUtil {
 
     static {
         JedisPoolConfig writePoolConfig = getPoolConfig();
-        pool = new JedisPool( writePoolConfig, MerchantContext.REDIS_HOST, MerchantContext.REDIS_PORT);
+        pool = new JedisPool( writePoolConfig, BlogContext.REDIS_HOST, BlogContext.REDIS_PORT);
         set("TEST", "TRUE");
         del("TEST");
     }
 
     private static JedisPoolConfig getPoolConfig() {
         JedisPoolConfig poolConfig = new JedisPoolConfig();
-        poolConfig.setMaxIdle(MerchantContext.REDIS_MAX_IDLE);
-        poolConfig.setMaxTotal(MerchantContext.REDIS_MAX_TOTAL);
-        poolConfig.setTestOnBorrow(MerchantContext.REDIS_TEST_ON_BORROW);
-        poolConfig.setMaxWaitMillis(MerchantContext.REDIS_MAX_WAIT_MILLIS);
-        poolConfig.setMinEvictableIdleTimeMillis(MerchantContext.REDIS_MIN_EVICTABLE_IDLE_TIME_MILLS);
+        poolConfig.setMaxIdle(BlogContext.REDIS_MAX_IDLE);
+        poolConfig.setMaxTotal(BlogContext.REDIS_MAX_TOTAL);
+        poolConfig.setTestOnBorrow(BlogContext.REDIS_TEST_ON_BORROW);
+        poolConfig.setMaxWaitMillis(BlogContext.REDIS_MAX_WAIT_MILLIS);
+        poolConfig.setMinEvictableIdleTimeMillis(BlogContext.REDIS_MIN_EVICTABLE_IDLE_TIME_MILLS);
         log.info("redis pool config info is {}", new String[]{JSON.toJSONString(poolConfig)});
         return poolConfig;
     }
