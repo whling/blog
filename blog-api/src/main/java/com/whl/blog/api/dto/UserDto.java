@@ -1,24 +1,19 @@
-package com.whl.blog.api.pojo;
+package com.whl.blog.api.dto;
 
 import java.io.Serializable;
 
 /**
  * Created by SuperS on 16/2/23.
- * 对应 t_user 表
- * id   用户id
- * state    用户类型state,0代表普通用户，1代表管理员
- * username 用户名
- * password 用户密码
+ * id 用户id
+ * state 用户类型 0用户 1管理员
  * nickname 用户昵称
- * email    用户邮箱
- * website  用户网站
- * imageName用户头像名称
+ * email 用户邮箱
+ * website 用户网站
+ * imageName 用户图片名称
  */
-public class User implements Serializable {
+public class UserDto implements Serializable {
     private Integer id;
     private Integer state;
-    private String username;
-    private String password;
     private String nickname;
     private String email;
     private String website;
@@ -38,22 +33,6 @@ public class User implements Serializable {
 
     public void setState(Integer state) {
         this.state = state;
-    }
-
-    public String getUsername() {
-        return username;
-    }
-
-    public void setUsername(String username) {
-        this.username = username;
-    }
-
-    public String getPassword() {
-        return password;
-    }
-
-    public void setPassword(String password) {
-        this.password = password;
     }
 
     public String getNickname() {
@@ -90,11 +69,9 @@ public class User implements Serializable {
 
     @Override
     public String toString() {
-        return "User{" +
+        return "UserDto{" +
                 "id=" + id +
                 ", state=" + state +
-                ", username='" + username + '\'' +
-                ", password='" + password + '\'' +
                 ", nickname='" + nickname + '\'' +
                 ", email='" + email + '\'' +
                 ", website='" + website + '\'' +

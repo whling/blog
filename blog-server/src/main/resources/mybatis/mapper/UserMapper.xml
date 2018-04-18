@@ -1,196 +1,71 @@
 <?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.whl.blog.server.dao.UserMapper">
-    <!-- result map settings -->
-    <resultMap id="BaseResultMap" type="com.whl.blog.api.pojo.User">
-        <id column="id" property="userId" jdbcType="BIGINT"/>
-        <result column="username" property="userName" jdbcType="VARCHAR"/>
-        <result column="password" property="passWord" jdbcType="VARCHAR"/>
-        <result column="nickname" property="nickName" jdbcType="VARCHAR"/>
-        <result column="phone" property="phone" jdbcType="VARCHAR"/>
-        <result column="email" property="email" jdbcType="VARCHAR"/>
-        <result column="status" property="status" jdbcType="SMALLINT"/>
-        <result column="login_type" property="loginType" jdbcType="SMALLINT"/>
-        <result column="avatar" property="avatar" jdbcType="VARCHAR"/>
-        <result column="gender" property="gender" jdbcType="SMALLINT"/>
-        <result column="meta" property="meta" jdbcType="VARCHAR"/>
-        <result column="level" property="level" jdbcType="SMALLINT"/>
-        <result column="md5" property="md5" jdbcType="VARCHAR"/>
-        <result column="create_time" property="createTime" jdbcType="TIMESTAMP"/>
-        <result column="modify_time" property="modifyTime" jdbcType="TIMESTAMP"/>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="com.xingfly.dao.UserDao">
+
+
+    <resultMap id="userMap" type="com.xingfly.model.User">
+        <id column="userId" property="id"/>
+        <result column="state" property="state"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="nickname" property="nickname"/>
+        <result column="email" property="email"/>
+        <result column="website" property="website"/>
+        <result column="imageName" property="imagePath"/>
     </resultMap>
 
-    <sql id="table_name">w_user</sql>
+    <resultMap id="userDto" type="com.xingfly.model.dto.UserDto">
+        <id column="userId" property="id"/>
+        <result column="state" property="state"/>
+        <result column="nickname" property="nickname"/>
+        <result column="email" property="email"/>
+        <result column="website" property="website"/>
+        <result column="imageName" property="imagePath"/>
+    </resultMap>
 
-    <sql id="column_list">
-		id,
-        username,
-        password,
-        nickname,
-        phone,
-        email,
-        status,
-        login_type,
-        avatar,
-        gender,
-        meta,
-        `level`,
-        md5,
-        create_time,
-        modify_time
-	</sql>
-
-    <insert id="save" parameterType="com.urwoo.entity.User">
-        INSERT INTO
-        <include refid="table_name"/>
-        (username,
-        password,
-        nickname,
-        phone,
-        email,
-        status,
-        login_type,
-        avatar,
-        gender,
-        meta,
-        `level`,
-        md5,
-        create_time,
-        modify_time)
-        VALUE
-        (#{username, jdbcType=VARCHAR},
-        #{password, jdbcType=VARCHAR},
-        #{nickname, jdbcType=VARCHAR},
-        #{phone, jdbcType=VARCHAR},
-        #{email, jdbcType=VARCHAR},
-        #{status, jdbcType=SMALLINT},
-        #{loginType, jdbcType=SMALLINT},
-        #{avatar, jdbcType=VARCHAR},
-        #{gender, jdbcType=SMALLINT},
-        #{meta, jdbcType=VARCHAR},
-        #{level, jdbcType=SMALLINT},
-        #{md5, jdbcType=VARCHAR},
-        now(), now())
+    <insert id="save">
+        INSERT INTO t_user VALUES (NULL, 0, #{username}, #{password}, #{nickname}, #{email}, #{website}, #{imagePath})
     </insert>
-
-    <update id="update" parameterType="com.urwoo.entity.User">
-        UPDATE
-        <include refid="table_name"/>
-        SET
-        username=#{username, jdbcType=VARCHAR},
-        nickname=#{nickname, jdbcType=VARCHAR},
-        phone=#{phone, jdbcType=VARCHAR},
-        email=#{email, jdbcType=VARCHAR},
-        login_type=#{loginType, jdbcType=SMALLINT},
-        avatar= #{avatar, jdbcType=VARCHAR},
-        `level`=#{level, jdbcType=SMALLINT},
-        meta=#{meta, jdbcType=VARCHAR}
-        <where>
-            <![CDATA[id=#{id, jdbcType=BIGINT}]]>
-        </where>
+    <update id="update">
+        UPDATE t_user
+        SET nickname = #{nickname}, username = #{username}, password = #{password}, email = #{email}
+        WHERE userId = #{id}
     </update>
 
-    <update id="updatePwd">
-        UPDATE
-        <include refid="table_name"/>
-        SET
-        password=#{password, jdbcType=VARCHAR}
-        <where>
-            <![CDATA[id=#{id, jdbcType=BIGINT}]]>
-        </where>
-    </update>
+    <delete id="delete">
+        DELETE FROM t_user
+        WHERE userId = #{id}
+    </delete>
 
-    <!-- 批量更新状态 -->
-    <update id="batchUpdateStatus">
-        UPDATE
-        <include refid="table_name"/>
-        SET `status`=#{status}
-        <where>
-            id
-            IN
-            <foreach collection="ids" index="index" item="item" open="(" close=")" separator=",">
-                #{item}
-            </foreach>
-        </where>
-    </update>
-
-    <select id="getById" resultMap="BaseResultMap">
-        SELECT
-        <include refid="column_list"/>
-        FROM
-        <include refid="table_name"/>
-        <where>
-            id=#{id, jdbcType=BIGINT}
-        </where>
+    <select id="login" resultType="com.xingfly.model.dto.UserDto">
+        SELECT *
+        FROM t_user
+        WHERE username = #{username} AND password = #{password}
     </select>
 
-    <select id="getByUsername" resultMap="BaseResultMap">
-        SELECT
-        <include refid="column_list"/>
-        FROM
-        <include refid="table_name"/>
-        <where>
-            `username`=#{username, jdbcType=VARCHAR}
-        </where>
+    <select id="getUsers" resultMap="userMap">
+        SELECT *
+        FROM t_user
+    </select>
+    <select id="getUser" resultMap="userMap">
+        SELECT *
+        FROM t_user
+        WHERE userId = #{id}
+    </select>
+    <select id="userIsNotEmpty" resultType="java.lang.Integer">
+        SELECT count(*)
+        FROM t_user
+        WHERE username = #{name}
+    </select>
+    <select id="pagenation" resultMap="userMap">
+        SELECT *
+        FROM t_user
+        ORDER BY userId DESC
+        LIMIT #{startIndex}, #{pageSize};
     </select>
 
-    <select id="getByPhone" resultMap="BaseResultMap">
-        SELECT
-        <include refid="column_list"/>
-        FROM
-        <include refid="table_name"/>
-        <where>
-            `phone`=#{phone, jdbcType=VARCHAR}
-        </where>
-    </select>
 
-    <select id="getByEmail" resultMap="BaseResultMap">
-        SELECT
-        <include refid="column_list"/>
-        FROM
-        <include refid="table_name"/>
-        <where>
-            `email`=#{email, jdbcType=VARCHAR}
-        </where>
-    </select>
-
-    <select id="query" resultMap="BaseResultMap">
-        SELECT
-        <include refid="column_list"/>
-        FROM
-        <include refid="table_name"/>
-        <where>
-            <include refid="param_condition_sql"/>
-        </where>
-        ORDER BY
-        modify_time DESC
-        LIMIT #{start, jdbcType=BIGINT}, #{limit, jdbcType=INTEGER}
-    </select>
-
-    <select id="count" resultType="java.lang.Long">
-        SELECT COUNT(1) FROM
-        <include refid="table_name"/>
-        <where>
-            <include refid="param_condition_sql"/>
-        </where>
-    </select>
-
-    <sql id="param_condition_sql">
-        AND `status` <![CDATA[<>]]> 2
-        <if test="param.status != null">
-            AND `status`=#{param.status, jdbcType=INTEGER}
-        </if>
-        <if test="param.level != null">
-            AND `level`=#{param.level, jdbcType=SMALLINT}
-        </if>
-        <if test="param.names != null and param.names.length > 0">
-            AND
-            <foreach collection="param.names" index="index" item="name" open="(" close=")" separator="or">
-                `name` LIKE CONCAT('%',CONCAT(#{name, jdbcType=VARCHAR},'%'))
-            </foreach>
-        </if>
-        <if test="param.startDate != null and param.startDate != '' and param.endDate != null and param.endDate != ''">
-            AND create_time BETWEEN CONCAT(#{param.startDate}, ' 00:00:00') AND CONCAT(#{param.endDate}, ' 23:59:59')
-        </if>
-    </sql>
 </mapper>

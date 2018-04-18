@@ -32,14 +32,31 @@
         </property>
     </bean>
 
-    <bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-        <property name="order" value="1"/>
-        <property name="prefix" value="/WEB-INF/views/"/>
-        <property name="suffix" value=".html"/>
-        <property name="viewClass">
-            <value>org.springframework.web.servlet.view.InternalResourceView</value>
+    <bean id="velocityConfigurer"
+          class="org.springframework.web.servlet.view.velocity.VelocityConfigurer">
+        <property name="resourceLoaderPath" value="/WEB-INF/pages/"/>
+        <property name="velocityProperties">
+            <props>
+                <prop key="input.encoding">utf-8</prop>
+                <prop key="output.encoding">utf-8</prop>
+            </props>
         </property>
     </bean>
+    <!--配置附加工具，以及将后缀为vm的文件交给下面的Resolver处理-->
+    <bean id="velocityViewResolver"
+          class="org.springframework.web.servlet.view.velocity.VelocityViewResolver">
+        <property name="suffix" value=".vm"/>
+        <property name="contentType" value="text/html;charset=utf-8"/>
+    </bean>
+
+    <!--<bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">-->
+        <!--<property name="order" value="1"/>-->
+        <!--<property name="prefix" value="/WEB-INF/views/"/>-->
+        <!--<property name="suffix" value=".html"/>-->
+        <!--<property name="viewClass">-->
+            <!--<value>org.springframework.web.servlet.view.InternalResourceView</value>-->
+        <!--</property>-->
+    <!--</bean>-->
 
     <!-- 异常处理 -->
     <bean id="exceptionResolver" class="com.whl.blog.web.common.handler.BlogExceptionHandler"/>
@@ -65,14 +82,14 @@
             <mvc:exclude-mapping path="/view/statics/**"/>
             <bean class="com.whl.blog.web.common.interceptor.CookieAuthInterceptor"/>
         </mvc:interceptor>
-        <mvc:interceptor>
-            <mvc:mapping path="/**"/>
-            <mvc:exclude-mapping path="/login/in"/>
-            <mvc:exclude-mapping path="/login/getPin"/>
-            <mvc:exclude-mapping path="/statics/**"/>
-            <mvc:exclude-mapping path="/view/statics/**"/>
-            <bean class="com.jiupai.platform.merchant.common.interceptor.RuleInterceptor"/>
-        </mvc:interceptor>
+        <!--<mvc:interceptor>-->
+            <!--<mvc:mapping path="/**"/>-->
+            <!--<mvc:exclude-mapping path="/login/in"/>-->
+            <!--<mvc:exclude-mapping path="/login/getPin"/>-->
+            <!--<mvc:exclude-mapping path="/statics/**"/>-->
+            <!--<mvc:exclude-mapping path="/view/statics/**"/>-->
+            <!--<bean class="com.jiupai.platform.merchant.common.interceptor.RuleInterceptor"/>-->
+        <!--</mvc:interceptor>-->
     </mvc:interceptors>
 
     <bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">

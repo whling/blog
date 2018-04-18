@@ -1,1 +1,1 @@
-traceFilter=com.whl.blog.common.filter.TraceFilter
+traceFilter=com.whl.blog.server.common.filter.TraceFilter

@@ -8,8 +8,15 @@
 
     <dubbo:application name="blog-server" logger="slf4j"/>
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" register="true" timeout="100000"/>
-    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}" />
+    <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
 
-    <dubbo:reference id="merInfoService" interface="com.jiupai.platform.merchant.api.IMerInfoService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:monitor protocol="registry" />
+    <dubbo:provider filter="traceFilter" threadpool="fixed" threads="50" timeout="5000" accepts="5000"/>
+
+    <dubbo:service interface="com.whl.blog.api.AboutService" ref="aboutService" version="0.0.1"/>
+    <dubbo:service interface="com.whl.blog.api.ArticleService" ref="articleService" version="0.0.1"/>
+    <dubbo:service interface="com.whl.blog.api.CategoryService" ref="categoryService" version="0.0.1"/>
+    <dubbo:service interface="com.whl.blog.api.UserService" ref="userService" version="0.0.1"/>
+    <dubbo:service interface="com.whl.blog.api.WebAppService" ref="webAppService" version="0.0.1"/>
+
+    <dubbo:monitor protocol="registry"/>
 </beans>
