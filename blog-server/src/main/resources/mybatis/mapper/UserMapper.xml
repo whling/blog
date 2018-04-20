@@ -3,10 +3,10 @@
         PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
         "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 
-<mapper namespace="com.xingfly.dao.UserDao">
+<mapper namespace="com.whl.blog.server.dao.UserMapper">
 
 
-    <resultMap id="userMap" type="com.xingfly.model.User">
+    <resultMap id="userMap" type="com.whl.blog.api.pojo.User">
         <id column="userId" property="id"/>
         <result column="state" property="state"/>
         <result column="username" property="username"/>
@@ -17,7 +17,7 @@
         <result column="imageName" property="imagePath"/>
     </resultMap>
 
-    <resultMap id="userDto" type="com.xingfly.model.dto.UserDto">
+    <resultMap id="userDto" type="com.whl.blog.api.dto.UserDto">
         <id column="userId" property="id"/>
         <result column="state" property="state"/>
         <result column="nickname" property="nickname"/>
@@ -25,6 +25,12 @@
         <result column="website" property="website"/>
         <result column="imageName" property="imagePath"/>
     </resultMap>
+
+    <select id="login" resultType="com.xingfly.model.dto.UserDto">
+        SELECT *
+        FROM t_user
+        WHERE username = #{username} AND password = #{password}
+    </select>
 
     <insert id="save">
         INSERT INTO t_user VALUES (NULL, 0, #{username}, #{password}, #{nickname}, #{email}, #{website}, #{imagePath})
@@ -40,11 +46,6 @@
         WHERE userId = #{id}
     </delete>
 
-    <select id="login" resultType="com.xingfly.model.dto.UserDto">
-        SELECT *
-        FROM t_user
-        WHERE username = #{username} AND password = #{password}
-    </select>
 
     <select id="getUsers" resultMap="userMap">
         SELECT *

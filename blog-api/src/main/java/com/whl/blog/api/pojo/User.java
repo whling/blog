@@ -15,6 +15,7 @@ import java.io.Serializable;
  * imageName用户头像名称
  */
 public class User implements Serializable {
+
     private Integer id;
     private Integer state;
     private String username;

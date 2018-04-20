@@ -14,38 +14,38 @@ import java.util.List;
 @Repository
 public interface ArticleMapper {
     //搜索文章根据文章标题
-    public List<ArticleDto> search(Article a_title) throws Exception;
+    List<ArticleDto> search(Article a_title);
 
     //分页
-    public List<ArticleDto> pagerAction(Pager pager) throws Exception;
+    List<ArticleDto> pagerAction(Pager pager);
 
     //获取文章Dto
-    public ArticleDto getArticleDto(Integer id) throws Exception;
+    ArticleDto getArticleDto(Integer id);
 
     //获取上一篇文章
-    public ArticleLiteDto getPreArticleDto(Integer id) throws Exception;
+    ArticleLiteDto getPreArticleDto(Integer id);
 
     //获取下一篇文章
-    public ArticleLiteDto getNextArticleDto(Integer id) throws Exception;
+    ArticleLiteDto getNextArticleDto(Integer id);
 
     //获取某分类下文章
-    public List<ArticleLiteDto> getByCategory(int categoryId) throws Exception;
+    List<ArticleLiteDto> getByCategory(int categoryId);
 
     //归档
-    public List<ArticleLiteDto> archive() throws Exception;
+    List<ArticleLiteDto> archive();
 
     //更新点击
-    public void updateArticleClicks(Integer clicks, Integer id) throws Exception;
+    void updateArticleClicks(Integer clicks, Integer id);
 
     //更新文章
-    public void update(Article article) throws Exception;
+    void update(Article article);
 
     //保存文章
-    public void save(Article article) throws Exception;
+    void save(Article article);
 
     //删除文章
-    public void delete(Integer id) throws Exception;
+    void delete(Integer id);
 
     //数量统计
-    public int count() throws Exception;
+    int count();
 }

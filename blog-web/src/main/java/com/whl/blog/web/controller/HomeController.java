@@ -1,10 +1,10 @@
 package com.whl.blog.web.controller;
 
-import com.whl.blog.api.ArticleService;
 import com.whl.blog.api.WebAppService;
 import com.whl.blog.api.pojo.WebApp;
 import com.whl.blog.web.common.Constants;
 import com.whl.blog.web.common.pager.mysql.Pager;
+import com.whl.blog.web.service.ArticleServiceImpl;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -24,7 +24,7 @@ import javax.servlet.http.HttpServletRequest;
 public class HomeController {
 
     @Autowired
-    private ArticleService articleService;
+    private ArticleServiceImpl articleService;
 
     @Autowired
     private WebAppService webAppService;

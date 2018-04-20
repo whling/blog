@@ -12,15 +12,15 @@ import java.util.List;
 @Repository
 public interface WebAppMapper {
 
-    public void save(WebApp webApp) throws Exception;
+    void save(WebApp webApp);
 
-    public void update(WebApp webApp) throws Exception;
+    void update(WebApp webApp);
 
-    public WebAppDto getWebDto(Integer id) throws Exception;
+    WebAppDto getWebDto(Integer id);
 
-    public Integer getArticlesView() throws Exception;
+    Integer getArticlesView();
 
-    public Integer count() throws Exception;
+    Integer count();
 
-    public List<WebApp> getWebDtos() throws Exception;
+    List<WebApp> getWebDtos();
 }

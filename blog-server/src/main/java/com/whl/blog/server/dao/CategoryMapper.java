@@ -14,26 +14,26 @@ import java.util.List;
 public interface CategoryMapper {
 
     //获取分类列表
-    public List<CategoryDto> all() throws Exception;
+    List<CategoryDto> all();
 
     //更新分类
-    public void update(Category category) throws Exception;
+    void update(Category category);
 
     //保存分类
-    public void save(Category category) throws Exception;
+    void save(Category category);
 
     //删除分类
-    public void delete(Integer id) throws Exception;
+    void delete(Integer id);
 
     //获取分类
-    public Category get(Integer id) throws Exception;
+    Category get(Integer id);
 
     //是否存在该categoryId >0存在
-    public int exist(int categoryId) throws Exception;
+    int exist(int categoryId);
 
     //分页查询
-    public List<CategoryDto> pagenation(Pager pager) throws Exception;
+    List<CategoryDto> pagenation(Pager pager);
 
     //总数
-    public int count() throws Exception;
+    int count();
 }

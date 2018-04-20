@@ -11,20 +11,20 @@ import java.util.List;
 @Repository
 public interface AboutMapper {
     //获取About
-    public About getAbout(Integer id) throws Exception;
+    About getAbout(Integer id);
 
     //更新About
-    public void upDate(About about) throws Exception;
+    void upDate(About about);
 
     //存储About
-    public void save(About about) throws Exception;
+    void save(About about);
 
     //删除About
-    public void delete(Integer id) throws Exception;
+    void delete(Integer id);
 
     //计数About
-    public int count() throws Exception;
+    int count();
 
     //About列表
-    public List<About> list() throws Exception;
+    List<About> list();
 }

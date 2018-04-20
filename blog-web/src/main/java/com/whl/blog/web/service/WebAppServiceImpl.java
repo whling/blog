@@ -3,7 +3,8 @@ package com.whl.blog.web.service;
 import com.whl.blog.api.WebAppService;
 import com.whl.blog.api.dto.WebAppDto;
 import com.whl.blog.api.pojo.WebApp;
-import com.whl.blog.server.dao.WebAppMapper;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import javax.annotation.Resource;
@@ -12,70 +13,35 @@ import java.util.List;
 /**
  * Created by SuperS on 16/3/16.
  */
-@Service("webAppService")
-public class WebAppServiceImpl implements WebAppService {
+@Service("webAppServiceImpl")
+public class WebAppServiceImpl {
+
+    private static final Logger logger = LoggerFactory.getLogger(WebAppServiceImpl.class);
+
     @Resource
-    private WebAppMapper webAppMapper;
+    private WebAppService webAppService;
 
-    @Override
     public void saveWebApp(WebApp webApp) {
-        try {
-            webAppMapper.save(webApp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        webAppService.saveWebApp(webApp);
     }
 
-    @Override
     public void updateWebApp(WebApp webApp) {
-        try {
-            webAppMapper.update(webApp);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
+        webAppService.updateWebApp(webApp);
     }
 
-    @Override
     public WebAppDto getWebDtoWebApp(Integer id) {
-        WebAppDto webAppDto = null;
-        try {
-            webAppDto = webAppMapper.getWebDto(id);
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return webAppDto;
+        return webAppService.getWebDtoWebApp(id);
     }
 
-    @Override
     public Integer getArticlesView() {
-        Integer totalViews = 0;
-        try {
-            totalViews = webAppMapper.getArticlesView();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return totalViews;
+        return webAppService.getArticlesView();
     }
 
-    @Override
     public List<WebApp> getWebAppDtos() {
-        List<WebApp> webApps = null;
-        try {
-            webApps = webAppMapper.getWebDtos();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return webApps;
+        return webAppService.getWebAppDtos();
     }
 
-    @Override
     public boolean webAppNotNull() {
-        Integer total = 0;
-        try {
-            total = webAppMapper.count();
-        } catch (Exception e) {
-            e.printStackTrace();
-        }
-        return total > 0 ? true : false;
+        return webAppService.webAppNotNull();
     }
 }

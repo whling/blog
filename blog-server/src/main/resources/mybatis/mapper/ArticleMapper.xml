@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.xingfly.dao.ArticleDao">
-    <resultMap id="ArticleLiteDto" type="com.xingfly.model.dto.ArticleLiteDto">
+
+<mapper namespace="com.whl.blog.server.dao.ArticleMapper">
+    <resultMap id="ArticleLiteDto" type="com.whl.blog.api.dto.ArticleLiteDto">
         <id column="articleId" property="id"/>
         <result column="title" property="title"/>
         <result column="pubDate" property="pubDate"/>
         <result column="clicks" property="clicks"/>
         <result column="remark" property="remark"/>
-        <association property="user" javaType="com.xingfly.model.dto.UserDto">
+        <association property="user" javaType="com.whl.blog.api.dto.UserDto">
             <id column="userId" property="id"/>
             <result column="imageName" property="imagePath"/>
             <result column="state" property="state"/>
@@ -17,7 +18,7 @@
         </association>
     </resultMap>
 
-    <resultMap id="ArticleDto" type="com.xingfly.model.dto.ArticleDto">
+    <resultMap id="ArticleDto" type="com.whl.blog.api.dto.ArticleDto">
         <id column="articleId" property="id"/>
         <result column="title" property="title"/>
         <result column="content" property="content"/>
@@ -27,7 +28,7 @@
         <result column="remark" property="remark"/>
         <result column="picture" property="picture"/>
         <result column="isDraft" property="isDraft"/>
-        <association property="user" javaType="com.xingfly.model.dto.UserDto">
+        <association property="user" javaType="com.whl.blog.api.dto.UserDto">
             <id column="userId" property="id"/>
             <result column="imageName" property="imagePath"/>
             <result column="state" property="state"/>
@@ -35,7 +36,7 @@
             <result column="email" property="email"/>
             <result column="website" property="website"/>
         </association>
-        <association property="category" javaType="com.xingfly.model.Category">
+        <association property="category" javaType="com.whl.blog.api.pojo.Category">
             <id column="categoryId" property="id"/>
             <result column="categoryName" property="name"/>
         </association>

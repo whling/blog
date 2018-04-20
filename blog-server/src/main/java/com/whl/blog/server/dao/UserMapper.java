@@ -3,6 +3,7 @@ package com.whl.blog.server.dao;
 import com.whl.blog.api.dto.UserDto;
 import com.whl.blog.api.pojo.User;
 import com.whl.blog.web.common.pager.mysql.Pager;
+import org.apache.ibatis.annotations.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
@@ -13,26 +14,27 @@ import java.util.List;
 @Repository
 public interface UserMapper {
     // 用户登录
-    public UserDto login(User user) throws Exception;
+    UserDto login(@Param("username") String username,
+                  @Param("password") String password);
 
     // 添加或保存用户
-    public void save(User user) throws Exception;
+    void save(User user);
 
     // 更新用户
-    public void update(User user) throws Exception;
+    void update(User user);
 
     // 获取用户列表
-    public List<User> getUsers() throws Exception;
+    List<User> getUsers();
 
     // 删除用户
-    public void delete(Integer id) throws Exception;
+    void delete(Integer id);
 
     // 获取用户
-    public User getUser(Integer id) throws Exception;
+    User getUser(Integer id);
 
     // 分页获取用户
-    public List<User> pagenation(Pager pager) throws Exception;
+    List<User> pagenation(Pager pager);
 
     // 是否存在用户
-    public int userIsNotEmpty(String name) throws Exception;
+    int userIsNotEmpty(String name);
 }

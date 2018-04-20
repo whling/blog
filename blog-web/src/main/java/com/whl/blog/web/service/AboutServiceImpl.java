@@ -10,7 +10,7 @@ import java.util.List;
 /**
  * Created by SuperS on 16/1/7.
  */
-@Service("aboutService")
+@Service("aboutServiceImpl")
 public class AboutServiceImpl {
 
     @Resource

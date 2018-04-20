@@ -10,6 +10,10 @@
     <dubbo:registry protocol="zookeeper" address="${dubbo.registry.address}" register="true" timeout="100000"/>
     <dubbo:protocol name="dubbo" port="${dubbo.protocol.port}"/>
 
-    <dubbo:reference id="merInfoService" interface="com.jiupai.platform.merchant.api.IMerInfoService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
-    <dubbo:monitor protocol="registry" />
+    <dubbo:reference id="aboutService" interface="com.whl.blog.api.AboutService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
+    <dubbo:reference id="articleService" interface="com.whl.blog.api.ArticleService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
+    <dubbo:reference id="categoryService" interface="com.whl.blog.api.CategoryService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
+    <dubbo:reference id="userService" interface="com.whl.blog.api.UserService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
+    <dubbo:reference id="webAppService" interface="com.whl.blog.api.WebAppService" version="0.0.1" loadbalance="roundrobin" cluster="failfast" timeout="50000"/>
+    <dubbo:monitor protocol="registry"/>
 </beans>
